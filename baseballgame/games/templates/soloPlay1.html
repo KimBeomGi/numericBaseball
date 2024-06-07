@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}soloplay - BaseballGame⚾{% endblock %}
+
+{% block content %}
+<div id="soloPlay1-container">
+  <div class="soloPlay1-1">
+    <div>
+      <h1>숫자 3개를 선택하세요</h1>
+    </div> 
+    <div class="numpad">
+      <button class="numpad-button" onclick="appendNumber(1)">1</button>
+      <button class="numpad-button" onclick="appendNumber(2)" class="selected-number">2</button>
+      <button class="numpad-button" onclick="appendNumber(3)">3</button>
+      <button class="numpad-button" onclick="appendNumber(4)">4</button>
+      <button class="numpad-button" onclick="appendNumber(5)">5</button>
+      <button class="numpad-button" onclick="appendNumber(6)">6</button>
+      <button class="numpad-button" onclick="appendNumber(7)">7</button>
+      <button class="numpad-button" onclick="appendNumber(8)">8</button>
+      <button class="numpad-button" onclick="appendNumber(9)">9</button>
+      <button class="numpad-button" onclick="clearInput()">C</button>
+      <button class="numpad-button" onclick="appendNumber(0)">0</button>
+      <button class="numpad-button" onclick="deleteLast()">⌫</button>
+    </div>
+  </div>
+  <div class="soloPlay1-2">
+    <div>
+      <h1>선택한 숫자</h1>
+      <input type="text" id="inputField" class="input-field" maxlength="3" readonly>
+    </div> 
+    <div class="soloPlay1-button">
+      <form action="{% url 'soloPlay2' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="selectedNumbers" id="selectedNumbers">
+        <button onclick="" type="submit" class="btn btn-primary btn-lg">게임 시작</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function appendNumber(number) {
+      const inputField = document.getElementById('inputField');
+      if(inputField.value.length < 3 && !inputField.value.includes(number)){
+        inputField.value += number;
+        document.getElementById('selectedNumbers').value = inputField.value; 
+        document.querySelector(`button[onclick="appendNumber(${number})"]`).classList.add('selected-number')
+      }
+    }
+
+    function clearInput() {
+      const inputField = document.getElementById('inputField');
+      inputField.value = '';
+      document.getElementById('selectedNumbers').value = ''
+      syncButtonStates()
+    }
+
+    function deleteLast() {
+      const inputField = document.getElementById('inputField');
+      inputField.value = inputField.value.slice(0, -1);
+      document.getElementById('selectedNumbers').value = inputField.value
+      syncButtonStates()
+    }
+
+    function syncButtonStates() {
+      const inputField = document.getElementById('inputField')
+      const currentNumbers = inputField.value.split('')
+      const buttons = document.querySelectorAll('.numpad-button')
+      buttons.forEach((button) => {
+        if(!currentNumbers.includes(button.textContent)){
+          button.classList.remove('selected-number')
+        }else{
+          button.classList.add('selected-number')
+        }
+      })
+    }
+
+  </script>
+</div>
+{% endblock %}

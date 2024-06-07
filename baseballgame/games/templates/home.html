@@ -1,0 +1,41 @@
+<!-- templates/home.html -->
+<!-- base.html에서 변동 -->
+
+{% extends 'base.html' %}
+<!-- 저장된 이미지를 불러오기 위함 -->
+{% load static %}
+
+{% block title %}Home - BaseballGame⚾{% endblock %}
+
+{% block content %}
+<div id="home-container">
+  <div class="home-cheer-phrase">
+    <p>와아아!! 이겨라!! 우리팀 이겨라!! 아주라!!  와아ㅏㅇ아아어아어어ㅏ ㅇ와!!! 부산갈매기!!! 오오오오!!</p>
+    <p>👤👥👤👥 👤👥👤👥 👤👤👥👥👤👥👥 👤👥👤👥👥👤👥👤👥👤👥👤👥👥👤👥👤👥👤👥👤👥</p>
+    <p>👤👤👥👥👤👥👥👤👥👤👥👤👥👥👤👥👤👥 👤👥👤👥👥👤👥 👤👥👤👥👤👥👤👥</p>
+    <p>👤👤👥👥👤👥👤👥👤👥👥👤👥👤👥 👤👥👤👥👤👥👤👥👥👤👥 👤👥👤👥</p>
+    <p>👥👥👥👤👥👤👥👤👥👤👥👤👥👥👤👥👤👥👤👥👥👥👤👥👤👥👤 👥👤</p>
+  </div>
+
+  <div class="home-showing-images">
+    <img src="{% static 'images/pitcher.svg' %}" alt="Logo" width="100" height="100" class="">
+    <img src="{% static 'images/baseballBall.svg' %}" alt="Logo" width="50" height="50" class="" id="moving-ball">
+    <img src="{% static 'images/hitter.svg' %}" alt="Logo" width="100" height="100" class="">
+  </div>
+  
+  <div class="home-button-div">
+    <button type="button" onClick="handleGoSoloPlay1()" class="btn btn-primary btn-lg">혼자 하기</button>
+    <button type="button" onClick="handleGoMultiPlay1()" class="btn btn-success btn-lg">다른 사람과 하기</button>
+  </div>
+  <!-- <div id="kain"></div> -->
+</div>
+
+<script>
+  function handleGoSoloPlay1(){
+    window.location.href = "{% url 'soloPlay1' %}";
+  }
+  function handleGoMultiPlay1(){
+    window.location.href = "{% url 'multiPlay1' %}";
+  }
+</script>
+{% endblock %}

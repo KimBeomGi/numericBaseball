@@ -1,0 +1,114 @@
+/* base.html의 css */
+.base-nav{
+  height: 5rem;
+}
+#wrap{
+  min-height: calc(100vh - 5rem - 4rem); /* footer 높이를 빼준다. */
+}
+.footer{
+  height: 4rem; /* footer 높이 */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid black;
+}
+.footer-div{
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  /* padding: 1rem 0rem 1rem 0rem; */
+}
+.footer-div>p{
+  margin: 0px;
+}
+
+
+/* home.html의 css */
+#home-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+.home-cheer-phrase{
+  text-align: center;
+}
+.home-cheer-phrase>p{
+  margin: 1em 0em 1em 0em;
+}
+.home-showing-images{
+  margin-top: 6.25em;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+#moving-ball{
+  position: relative;
+  left: calc(-38vw + 100px);
+  top: 0px
+}
+
+.home-button-div{
+  margin: 6.25em 0em 6.25em 0em;
+}
+
+/* soloPlay1.html */
+.numpad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0rem;
+  height: 18.75rem;
+  width: 15.625rem;
+  /* margin: auto; */
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.numpad-button {
+  /* padding: 1em; */
+  font-size: 1.25rem;
+  background: white;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.selected-number {
+  background: blue;
+  color: white;
+}
+.input-field {
+  /* margin: 20px auto; */
+  padding: 0.5em;
+  font-size: 2rem;
+  text-align: center;
+  font-style: italic;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  background-color: lightblue;
+}
+
+#soloPlay1-container{
+  display: flex;
+  justify-content: space-around;
+}
+
+.soloPlay1-1{
+  margin: 4em 0em 4em 0em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.soloPlay1-1>div{
+  margin: 2em 0em 2em 0em;
+}
+.soloPlay1-2{
+  margin: 4em 0em 4em 0em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+}
+.soloPlay1-2>div{
+  margin: 2em 0em 2em 0em;
+  text-align: center;
+}

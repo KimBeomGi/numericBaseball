@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}soloplay - BaseballGame⚾{% endblock %}
+
+{% block content %}
+<div>
+  <h1>혼자 하기</h1>
+</div>
+<h2>{{posts}}</h2>
+<h3>{{tmp}}</h3>
+<script>
+  let post_data = "{{ posts|safe }}"
+  console.log(post_data)
+  console.log(typeof(post_data))
+  // array로 들어올때.
+  // let tmp_data = JSON.parse("{{tmp|safe}}")
+  // console.log(tmp_data)
+  // console.log(typeof(tmp_data))
+  const a = [1,5,67]
+  console.log(a)
+  let my_numbers = "{{ selectedNumbers|safe }}"
+ 
+</script>
+
+{% endblock %}
