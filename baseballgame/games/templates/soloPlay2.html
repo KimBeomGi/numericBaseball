@@ -4,23 +4,92 @@
 {% block title %}soloplay - BaseballGame⚾{% endblock %}
 
 {% block content %}
-<div>
-  <h1>혼자 하기</h1>
+<div id="soloPlay2Container" class="soloPlay2-container">
+  {% comment %} 내 상황 {% endcomment %}
+  <div>
+    {% comment %} 숫자 확인 판 {% endcomment %}
+    <div class="number-check-div">
+      <span>수 거름판</span>
+      <div class="number-check"></div>
+    </div>
+    {% comment %} 내 입력판 {% endcomment %}
+    <div>
+      
+    </div>
+  </div>
+  {% comment %} 입력판 {% endcomment %}
+  <div>
+    {% comment %} 숫자 입력 판 {% endcomment %}
+    <div>
+      <div>
+        <p>당신 차례입니다.<br>숫자 3개를 입력해주세요.</p>
+        <p>입력한 숫자: <span></span></p>
+      </div>
+      <div class="numpad">
+        <button class="numpad-button" onclick="appendNumber(1)">1</button>
+        <button class="numpad-button" onclick="appendNumber(2)" class="selected-number">2</button>
+        <button class="numpad-button" onclick="appendNumber(3)">3</button>
+        <button class="numpad-button" onclick="appendNumber(4)">4</button>
+        <button class="numpad-button" onclick="appendNumber(5)">5</button>
+        <button class="numpad-button" onclick="appendNumber(6)">6</button>
+        <button class="numpad-button" onclick="appendNumber(7)">7</button>
+        <button class="numpad-button" onclick="appendNumber(8)">8</button>
+        <button class="numpad-button" onclick="appendNumber(9)">9</button>
+        <button class="numpad-button" onclick="clearInput()">C</button>
+        <button class="numpad-button" onclick="appendNumber(0)">0</button>
+        <button class="numpad-button" onclick="deleteLast()">⌫</button>
+      </div>
+    </div>
+    {% comment %} 승리 패배 표시 {% endcomment %}
+    <div></div>
+    {% comment %} 다시하기 버튼 {% endcomment %}
+    <div></div>
+  </div>
+  {% comment %} 상대 상황 {% endcomment %}
+  <div></div>
 </div>
-<h2>{{posts}}</h2>
-<h3>{{tmp}}</h3>
+
+
 <script>
-  let post_data = "{{ posts|safe }}"
-  console.log(post_data)
-  console.log(typeof(post_data))
-  // array로 들어올때.
-  // let tmp_data = JSON.parse("{{tmp|safe}}")
-  // console.log(tmp_data)
-  // console.log(typeof(tmp_data))
-  const a = [1,5,67]
-  console.log(a)
-  let my_numbers = "{{ selectedNumbers|safe }}"
- 
+  const number_check_div = document.querySelector(".number-check")
+  for(let i = 0 ; i < 10; i++ ){
+    let new_div = document.createElement('div')
+    new_div.innerText = i
+    new_div.className = 'checking-number'
+
+    // 클릭 횟수를 추적하기 위한 변수
+    let clickCount = 0
+    
+    // 클릭 이벤트 리스너 추가
+    new_div.addEventListener('click', function() {
+      clickCount++
+      
+      // 클릭 횟수에 따라 색상 변경
+      if (clickCount === 1) {
+        new_div.style.backgroundColor = 'green'
+        new_div.style.color = "white"
+      } else if (clickCount === 2) {
+        new_div.style.backgroundColor = 'blue'
+        new_div.style.color = "white"
+      } else if (clickCount === 3) {
+        new_div.style.backgroundColor = 'red'
+        new_div.style.color = "white"
+      } else {
+        new_div.style.backgroundColor = ''
+        new_div.style.color = ""
+        clickCount = 0
+      }
+    });
+
+    number_check_div.appendChild(new_div)
+  }
+
+  let my_numbers = {{ selectedNumbers|safe }}
+  let computerNumbers = {{ computerNumber }}
+  console.log(my_numbers)
+  console.log(typeof(my_numbers))
+  console.log(computerNumbers)
+  console.log(typeof(computerNumbers))
 </script>
 
 {% endblock %}

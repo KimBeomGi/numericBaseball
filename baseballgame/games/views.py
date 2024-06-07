@@ -1,3 +1,5 @@
+import json
+import random
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -15,11 +17,17 @@ def soloPlay2(request):
         return render(request, 'soloPlay2.html')
     elif request.method == "POST":
         selected_numbers = request.POST.get('selectedNumbers')
+        selected_numbers_int = []
+        for i in range(len(selected_numbers)):
+            selected_numbers_int.append(int(selected_numbers[i]))
+
         
-        print(selected_numbers)
+        # 3개의 중복되지 않는 컴퓨터의 베이스볼 넘버 생성
+        computer_number = random.sample(range(0,10),3)
+        
         context = {
-            "posts" : '포스트방식',
-            "selectedNumbers": selected_numbers,
+            "selectedNumbers": selected_numbers_int,
+            "computerNumber": computer_number
         }
         return render(request, 'soloPlay2.html', context)
 
