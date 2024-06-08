@@ -9,12 +9,35 @@
   <div>
     {% comment %} 숫자 확인 판 {% endcomment %}
     <div class="number-check-div">
-      <span>수 거름판</span>
+      <h2>수 거름판</h2>
       <div class="number-check"></div>
     </div>
     {% comment %} 내 입력판 {% endcomment %}
     <div>
-      
+      <h1>내 현황판</h1>
+      <table id="myBoard" class="my-board status-board">
+        <tr>
+          <th scope="col">회차</td>
+          <th scope="col">번호1</td>
+          <th scope="col">번호2</td>
+          <th scope="col">번호3</td>
+          <th scope="col">결과</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>아웃</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>0S 2B</td>
+        </tr>
+      </table>
     </div>
   </div>
   {% comment %} 입력판 {% endcomment %}
@@ -23,11 +46,11 @@
     <div>
       <div>
         <p>당신 차례입니다.<br>숫자 3개를 입력해주세요.</p>
-        <p>입력한 숫자: <span></span></p>
+        <p>입력한 숫자: <span id="throwNumbers"></span></p>
       </div>
       <div class="numpad">
         <button class="numpad-button" onclick="appendNumber(1)">1</button>
-        <button class="numpad-button" onclick="appendNumber(2)" class="selected-number">2</button>
+        <button class="numpad-button" onclick="appendNumber(2)">2</button>
         <button class="numpad-button" onclick="appendNumber(3)">3</button>
         <button class="numpad-button" onclick="appendNumber(4)">4</button>
         <button class="numpad-button" onclick="appendNumber(5)">5</button>
@@ -35,7 +58,9 @@
         <button class="numpad-button" onclick="appendNumber(7)">7</button>
         <button class="numpad-button" onclick="appendNumber(8)">8</button>
         <button class="numpad-button" onclick="appendNumber(9)">9</button>
-        <button class="numpad-button" onclick="clearInput()">C</button>
+        <button class="numpad-button" onclick="throwball()">입력</button>
+        {% comment %} <button class="numpad-button" onclick="clearInput()">C</button> {% endcomment %}
+
         <button class="numpad-button" onclick="appendNumber(0)">0</button>
         <button class="numpad-button" onclick="deleteLast()">⌫</button>
       </div>
@@ -46,7 +71,33 @@
     <div></div>
   </div>
   {% comment %} 상대 상황 {% endcomment %}
-  <div></div>
+  <div>
+    <h1>상대방 현황판</h1>
+      <table id="enemyBoard" class="enemy-board status-board">
+        <tr>
+          <th scope="col">회차</td>
+          <th scope="col">번호1</td>
+          <th scope="col">번호2</td>
+          <th scope="col">번호3</td>
+          <th scope="col">결과</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>아웃</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>0S 2B</td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>
 
 
@@ -86,10 +137,50 @@
 
   let my_numbers = {{ selectedNumbers|safe }}
   let computerNumbers = {{ computerNumber }}
-  console.log(my_numbers)
-  console.log(typeof(my_numbers))
   console.log(computerNumbers)
-  console.log(typeof(computerNumbers))
+  
+
+  {% comment %} 숫자 야구 게임 숫자 입력 및 정리 {% endcomment %}
+  function appendNumber(number) {
+    {% comment %} number =  {% endcomment %}
+    const throwNumbers = document.getElementById('throwNumbers');
+    if(throwNumbers.innerText.length < 3 && !throwNumbers.innerText.includes(number)){
+      throwNumbers.innerText += number;
+      {% comment %} document.getElementById('selectedNumbers').innerText = throwNumbers.innerText;  {% endcomment %}
+      document.querySelector(`button[onclick="appendNumber(${number})"]`).classList.add('selected-number')
+    }
+  }
+
+  function clearInput() {
+    const throwNumbers = document.getElementById('throwNumbers');
+    throwNumbers.innerText = '';
+    {% comment %} document.getElementById('selectedNumbers').innerText = '' {% endcomment %}
+    syncButtonStates()
+  }
+
+  function deleteLast() {
+    const throwNumbers = document.getElementById('throwNumbers');
+    throwNumbers.innerText = throwNumbers.innerText.slice(0, -1);
+    {% comment %} document.getElementById('selectedNumbers').innerText = throwNumbers.innerText {% endcomment %}
+    syncButtonStates()
+  }
+
+  function syncButtonStates() {
+    const throwNumbers = document.getElementById('throwNumbers')
+    const currentNumbers = throwNumbers.innerText.split('')
+    const buttons = document.querySelectorAll('.numpad-button')
+    buttons.forEach((button) => {
+      if(!currentNumbers.includes(button.textContent)){
+        button.classList.remove('selected-number')
+      }else{
+        button.classList.add('selected-number')
+      }
+    })
+  }
+
+  function throwball() {
+    clearInput()
+  }
 </script>
 
 {% endblock %}

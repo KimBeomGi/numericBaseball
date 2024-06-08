@@ -117,18 +117,30 @@
 .soloPlay2-container{
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
 }
 .number-check{
-  display: flex;
-  flex-direction: row;
+  /* display: flex; */
+  /* flex-direction: row; */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 300px;
+  height: 100px;
 }
 .checking-number{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 1.25rem;
-  width: 2em;
-  height: 2em;
+  /* width: 2em; */
+  /* height: 2em; */
   text-align: center;
   vertical-align: bottom;
   border: 0.5px solid black;
   border-collapse: collapse;
   cursor: pointer;
+}
+.status-board{
+  width: 400px;
+  text-align: center;
 }
