@@ -86,10 +86,11 @@
   let enemyGameTimes = 0
   let myTurnNum = ''
   let whoIsWin = 0 // 0은 아직 경기가 끝나지 않음. 1은 내가 이김 2는 컴퓨터가 이김
+  let enemyChecking = []
   let my_numbers = {{ selectedNumbers|safe }}
-  console.log(my_numbers)
+  //console.log(my_numbers)
   let computerNumbers = {{ computerNumber }}
-  console.log(computerNumbers)
+  //console.log(computerNumbers)
 
   // 내 숫자 span에 입력
   const myNumSpan = document.getElementById('myNum')
@@ -132,13 +133,14 @@
 
   {% comment %} 숫자 야구 게임 숫자 입력 및 정리 {% endcomment %}
   function appendNumber(number) {
-    const throwNumbers = document.getElementById('throwNumbers');
-    if(throwNumbers.innerText.length < 3 && !throwNumbers.innerText.includes(number)){
-      throwNumbers.innerText += number;
-      myTurnNum = throwNumbers.innerText
-      // document.getElementById('selectedNumbers').innerText = throwNumbers.innerText; 
-      document.querySelector(`button[onclick="appendNumber(${number})"]`).classList.add('selected-number')
-      
+    if(!whoIsWin){
+      const throwNumbers = document.getElementById('throwNumbers');
+      if(throwNumbers.innerText.length < 3 && !throwNumbers.innerText.includes(number)){
+        throwNumbers.innerText += number;
+        myTurnNum = throwNumbers.innerText
+        // document.getElementById('selectedNumbers').innerText = throwNumbers.innerText; 
+        document.querySelector(`button[onclick="appendNumber(${number})"]`).classList.add('selected-number')
+      }
     }
   }
 
@@ -174,25 +176,28 @@
   }
 
   function handleThrowball(){
-    const is_can = throwball(1)
-    if(is_can){
-      throwball(2)
+    if(!whoIsWin){
+      const is_can = throwball(1)
+      if(is_can){
+        throwball(2)
+      }
     }
   }
   function throwball(who) {
     let newThrowNums = myTurnNum.split('').map(Number); // 배열로 변환
     let enemyNumbers = computerNumbers
     if (who == 2) {
+      
       enemyNumbers = my_numbers;
       let comNum = [];
       while (comNum.length < 3) {
         let tmp = Math.floor(Math.random() * 10);
-        if (!comNum.includes(tmp)) {
+        if (!comNum.includes(tmp) && !enemyChecking.includes(tmp)) {
           comNum.push(tmp);
         }
       }
       newThrowNums = comNum;
-      console.log('컴퓨터',newThrowNums)
+      //console.log('컴퓨터',newThrowNums)
     }
     // 숫자야구 게임 숫자 맞추기 로직
     if (newThrowNums.length === 3 && new Set(newThrowNums).size === 3 && !whoIsWin) {
@@ -208,8 +213,13 @@
       }
       const new_tr = document.createElement('tr')
       const new_times_td = document.createElement('td')
-      myGameTimes += 1
-      new_times_td.innerText = myGameTimes
+      if(who == 1){
+        myGameTimes += 1
+        new_times_td.innerText = myGameTimes
+      }else if(who == 2){
+        enemyGameTimes += 1
+        new_times_td.innerText = enemyGameTimes
+      }
       const new_ball_td1 = document.createElement('td')
       new_ball_td1.innerText = newThrowNums[0]
       const new_ball_td2 = document.createElement('td')
@@ -252,8 +262,25 @@
         // strike도 ball도 없으면
       } else if (strikes === 0 && balls === 0) {
         new_result_td.innerText = '아웃';
+        //  enemyChecking
+        if(who == 2){
+          const tmpEnemyChecking = new Set(enemyChecking)
+          for(let i = 0; i < 3; i++){
+            tmpEnemyChecking.add(newThrowNums[i])
+          }
+          enemyChecking = Array.from(tmpEnemyChecking)
+        }
       // ball이나 strike가 하나라도 있으면
       } else {
+        if(who == 2 && (balls === 3) || (balls === 2 && strikes === 1) || (balls === 1 && strikes == 2)){
+          const tmpEnemyChecking = new Set(enemyChecking)
+          for(let i = 0; i < 10; i++){
+            if(newThrowNums.includes(i)){
+              tmpEnemyChecking.add(i)  
+            }
+          }
+          enemyChecking = Array.from(tmpEnemyChecking)
+        }
         new_result_td.innerText = `${strikes}S ${balls}B`;
       }
 
@@ -265,7 +292,7 @@
       board.appendChild(new_tr);
 
       let answerThrowNum = ""
-
+      //console.log('컴퓨터 체킹', enemyChecking)
     }else if(whoIsWin && whoIsWin == who && who==1){
       alert("우승을 축하합니다.");
       return false
@@ -280,6 +307,10 @@
     }
     clearInput()
     return true
+  }
+
+  function comPuterChecking(){
+    
   }
 </script>
 
