@@ -119,6 +119,13 @@
   flex-direction: row;
   justify-content: space-around;
 }
+.soloPlay2-container >div{
+  margin-top: 3rem;
+}
+.soloPlay2-container h1, .soloPlay2-container h2 {
+  margin: 1em 0em 1em 0em;
+}
+
 .number-check-div{
   display: flex;
   flex-direction: column;
@@ -172,4 +179,15 @@
 }
 .text-center{
   text-align: center;
+}
+.soloPlay2-second{
+  
+}
+.flex-column{
+  display: flex;
+  flex-direction: column;
+}
+.flex-center{
+  align-items: center;
+  justify-content: center;
 }
