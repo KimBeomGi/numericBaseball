@@ -1,16 +1,16 @@
-# numericBaseball
+# ⚾숫자 야구 게임(numericBaseball)
 
 # 📄목차
 
-[🛶개요](https://www.notion.so/0345fd645deb48b980194740dad6426d?pvs=21)
+[🛶개요](#개요)
 
-[📅기간](https://www.notion.so/0345fd645deb48b980194740dad6426d?pvs=21)
+[📅기간](#기간)
 
-[📘기능](https://www.notion.so/0345fd645deb48b980194740dad6426d?pvs=21)
+[📘기능](#기능)
 
-[💻적용 알고리즘](https://www.notion.so/0345fd645deb48b980194740dad6426d?pvs=21)
+[💻적용 알고리즘](#적용-알고리즘)
 
-[📚사용기술](https://www.notion.so/0345fd645deb48b980194740dad6426d?pvs=21)
+[📚사용기술](#사용기술)
 
 ---
 
@@ -32,7 +32,7 @@
 2. 투수와 타자 사이로 야구공이 움직이게 하여, 첫 페이지에서의 이목을 집중
 3. ‘혼자하기‘ 버튼을 통해 게임을 위한 숫자 선택 페이지 이동
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/64d1e119-1729-45b6-977e-fe8866bd1334/ddfd0e46-c00c-46ab-adee-7334da47038d/Untitled.png)
+![image](https://github.com/KimBeomGi/numericBaseball/assets/128961042/5e11a9e7-5449-4f85-a264-5fc064b11910)
 
 ## 숫자 선택 페이지
 
@@ -42,30 +42,22 @@
 4. 숫자 3개 입력 시 숫자가 추가 되지 않음.
 5. 선택한 숫자를  넘버패드에서 선택 숫자의 배경 바뀜 및 ‘선택한 숫자’에서 명시적으로 확인 가능
 6. 게임 시작 버튼을 통해 게임 작동 페이지로 이동
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/64d1e119-1729-45b6-977e-fe8866bd1334/31dc7920-ecf2-4a58-b6e9-4f0b60d06ea5/Untitled.png)
-
-1. 숫자 3개를 미입력시 alert를 통해 알려주며, 페이지는 이동하지 않음
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/64d1e119-1729-45b6-977e-fe8866bd1334/84fffc93-d5fa-4793-879f-7bba95802a5c/Untitled.png)
+![스크린샷 2024-06-09 010303](https://github.com/KimBeomGi/numericBaseball/assets/128961042/c9f46cfa-b17b-4aa7-974a-c505603fdf6e)
+7. 숫자 3개를 미입력시 alert를 통해 알려주며, 페이지는 이동하지 않음
+![스크린샷 2024-06-09 011029](https://github.com/KimBeomGi/numericBaseball/assets/128961042/117ca68e-814b-4b58-bafc-b65110fb9e53)
 
 ## 게임 페이지
-
 1. ‘수 거름판’을 통해 상대방 번호에 대한 기록 가능
 2. ‘내 현황판’을 통해 이번 게임에서 내가 지금까지 상대방에게 던진 숫자들을 확인 가능
 3. ‘넘버패드’를 통해 중복되지 않는 숫자 3개를 입력하고, ‘입력’키로 상대방에게 숫자 3개를 던질 수 있음.
 4. ‘넘버패드’상단의 입력한 숫자에서 내가 입력한 숫자를 확인 가능
 5. ‘상대방 현황판’을 통해 상대방이 나에게 던진 숫자들을 확인 가능
+![스크린샷 2024-06-09 011754](https://github.com/KimBeomGi/numericBaseball/assets/128961042/b00c6382-9815-4148-b1b2-8c8ca49c2c7a)
+6. 컴퓨터에게 승리 시 ‘승리’표시와 함께 몇 회의 경기로 이겼음이 등장하고, 다시 하기 버튼이 생성됨
+![스크린샷 2024-06-09 012114](https://github.com/KimBeomGi/numericBaseball/assets/128961042/c87b2885-120a-4768-a3a6-71be64d38af0)
+7. 컴퓨터에게 패배도 가능. 이때는 ‘패배’표시와 함께 몇 회의 경기로 패배했음이 등장하고, 다시 하기 버튼이 생성됨.
+![스크린샷 2024-06-09 011754](https://github.com/KimBeomGi/numericBaseball/assets/128961042/1ce5873b-a046-4395-b528-16fc59018229)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/64d1e119-1729-45b6-977e-fe8866bd1334/45405c88-8356-4a34-9877-831a572bc678/Untitled.png)
-
-1. 컴퓨터에게 승리 시 ‘승리’표시와 함께 몇 회의 경기로 이겼음이 등장하고, 다시 하기 버튼이 생성됨
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/64d1e119-1729-45b6-977e-fe8866bd1334/0ac5f3be-6097-4f4f-84d3-a89e2e779395/Untitled.png)
-
-1. 컴퓨터에게 패배도 가능. 이때는 ‘패배’표시와 함께 몇 회의 경기로 패배했음이 등장하고, 다시 하기 버튼이 생성됨.
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/64d1e119-1729-45b6-977e-fe8866bd1334/d47320e3-99f0-427d-ae5d-ac328255e347/Untitled.png)
 
 # 💻적용 알고리즘
 
