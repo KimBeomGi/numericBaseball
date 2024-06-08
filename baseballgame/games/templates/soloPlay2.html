@@ -262,7 +262,7 @@
         // strike도 ball도 없으면
       } else if (strikes === 0 && balls === 0) {
         new_result_td.innerText = '아웃';
-        //  enemyChecking
+        //  enemyChecking에 추가
         if(who == 2){
           const tmpEnemyChecking = new Set(enemyChecking)
           for(let i = 0; i < 3; i++){
@@ -272,10 +272,11 @@
         }
       // ball이나 strike가 하나라도 있으면
       } else {
+        //  enemyChecking에서 해당 넘버 배고 전부 추가
         if(who == 2 && (balls === 3) || (balls === 2 && strikes === 1) || (balls === 1 && strikes == 2)){
           const tmpEnemyChecking = new Set(enemyChecking)
           for(let i = 0; i < 10; i++){
-            if(newThrowNums.includes(i)){
+            if(!newThrowNums.includes(i)){
               tmpEnemyChecking.add(i)  
             }
           }
@@ -292,7 +293,7 @@
       board.appendChild(new_tr);
 
       let answerThrowNum = ""
-      //console.log('컴퓨터 체킹', enemyChecking)
+      console.log('컴퓨터 체킹', enemyChecking)
     }else if(whoIsWin && whoIsWin == who && who==1){
       alert("우승을 축하합니다.");
       return false
