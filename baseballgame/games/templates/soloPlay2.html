@@ -9,33 +9,19 @@
   <div>
     {% comment %} 숫자 확인 판 {% endcomment %}
     <div class="number-check-div">
-      <h2>수 거름판</h2>
+      <h2 class="text-center">수 거름판</h2>
       <div class="number-check"></div>
     </div>
     {% comment %} 내 입력판 {% endcomment %}
     <div>
-      <h1>내 현황판</h1>
+      <h1 class="text-center">내 현황판</h1>
       <table id="myBoard" class="my-board status-board">
         <tr>
-          <th scope="col">회차</td>
-          <th scope="col">번호1</td>
-          <th scope="col">번호2</td>
-          <th scope="col">번호3</td>
-          <th scope="col">결과</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-          <td>아웃</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>4</td>
-          <td>5</td>
-          <td>6</td>
-          <td>0S 2B</td>
+          <th scope="col" style="width: 15%;">회차</td>
+          <th scope="col" style="width: 15%;">번호1</td>
+          <th scope="col" style="width: 15%;">번호2</td>
+          <th scope="col" style="width: 15%;">번호3</td>
+          <th scope="col" style="width: 40%;">결과</td>
         </tr>
       </table>
     </div>
@@ -72,36 +58,30 @@
   </div>
   {% comment %} 상대 상황 {% endcomment %}
   <div>
-    <h1>상대방 현황판</h1>
-      <table id="enemyBoard" class="enemy-board status-board">
-        <tr>
-          <th scope="col">회차</td>
-          <th scope="col">번호1</td>
-          <th scope="col">번호2</td>
-          <th scope="col">번호3</td>
-          <th scope="col">결과</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-          <td>아웃</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>4</td>
-          <td>5</td>
-          <td>6</td>
-          <td>0S 2B</td>
-        </tr>
-      </table>
-    </div>
+    <h1 class="text-center">상대방 현황판</h1>
+    <table id="enemyBoard" class="enemy-board status-board">
+      <tr>
+        <th scope="col" style="width: 15%;">회차</td>
+        <th scope="col" style="width: 15%;">번호1</td>
+        <th scope="col" style="width: 15%;">번호2</td>
+        <th scope="col" style="width: 15%;">번호3</td>
+        <th scope="col" style="width: 40%;">결과</td>
+      </tr>
+    </table>
   </div>
 </div>
 
 
 <script>
+  let myGameTimes = 0
+  let enemyGameTimes = 0
+  let myTurnNum = ''
+  let whoIsWin = 0 // 0은 아직 경기가 끝나지 않음. 1은 내가 이김 2는 컴퓨터가 이김
+  let my_numbers = {{ selectedNumbers|safe }}
+  let computerNumbers = {{ computerNumber }}
+  console.log(computerNumbers)
+
+  // 수 거름판의 숫자
   const number_check_div = document.querySelector(".number-check")
   for(let i = 0 ; i < 10; i++ ){
     let new_div = document.createElement('div')
@@ -134,34 +114,35 @@
 
     number_check_div.appendChild(new_div)
   }
-
-  let my_numbers = {{ selectedNumbers|safe }}
-  let computerNumbers = {{ computerNumber }}
-  console.log(computerNumbers)
   
 
   {% comment %} 숫자 야구 게임 숫자 입력 및 정리 {% endcomment %}
   function appendNumber(number) {
-    {% comment %} number =  {% endcomment %}
     const throwNumbers = document.getElementById('throwNumbers');
     if(throwNumbers.innerText.length < 3 && !throwNumbers.innerText.includes(number)){
       throwNumbers.innerText += number;
-      {% comment %} document.getElementById('selectedNumbers').innerText = throwNumbers.innerText;  {% endcomment %}
+      myTurnNum = throwNumbers.innerText
+      // document.getElementById('selectedNumbers').innerText = throwNumbers.innerText; 
       document.querySelector(`button[onclick="appendNumber(${number})"]`).classList.add('selected-number')
+      
     }
   }
 
   function clearInput() {
     const throwNumbers = document.getElementById('throwNumbers');
     throwNumbers.innerText = '';
-    {% comment %} document.getElementById('selectedNumbers').innerText = '' {% endcomment %}
+    myTurnNum = throwNumbers.innerText
+    
+    // document.getElementById('selectedNumbers').innerText = ''
     syncButtonStates()
   }
 
   function deleteLast() {
     const throwNumbers = document.getElementById('throwNumbers');
     throwNumbers.innerText = throwNumbers.innerText.slice(0, -1);
-    {% comment %} document.getElementById('selectedNumbers').innerText = throwNumbers.innerText {% endcomment %}
+    myTurnNum = throwNumbers.innerText
+    
+    // document.getElementById('selectedNumbers').innerText = throwNumbers.innerText
     syncButtonStates()
   }
 
@@ -179,6 +160,60 @@
   }
 
   function throwball() {
+    const newThrowNums = myTurnNum.split('').map(Number); // 배열로 변환
+    if (newThrowNums.length === 3 && new Set(newThrowNums).size === 3 && !whoIsWin) {
+      // 조건을 모두 만족하면 실행할 코드
+      // console.log("유효한 숫자 배열입니다.");
+      const myboard = document.getElementById('myBoard')
+      const new_tr = document.createElement('tr')
+      const new_times_td = document.createElement('td')
+      myGameTimes += 1
+      new_times_td.innerText = myGameTimes
+      const new_ball_td1 = document.createElement('td')
+      new_ball_td1.innerText = myTurnNum[0]
+      const new_ball_td2 = document.createElement('td')
+      new_ball_td2.innerText = myTurnNum[1]
+      const new_ball_td3 = document.createElement('td')
+      new_ball_td3.innerText = myTurnNum[2]
+      const new_result_td = document.createElement('td')
+      
+      let strikes = 0;
+      let balls = 0;
+      // 스트라이크와 볼 계산
+      for (let i = 0; i < 3; i++) {
+        // 같으면 strike
+        if (newThrowNums[i] === computerNumbers[i]) {
+          strikes++;
+        // 같진 않지만 포함은 되어 있으면 ball
+        } else if (computerNumbers.includes(newThrowNums[i])) {
+          balls++;
+        }
+      }
+      // strike가 3개면 이겼음
+      if (strikes === 3) {
+        whoIsWin = 1;
+        new_result_td.innerText = `${strikes}S 0B`;
+      // strike도 ball도 없으면
+      } else if (strikes === 0 && balls === 0) {
+        new_result_td.innerText = '아웃';
+      // ball이나 strike가 하나라도 있으면
+      } else {
+        new_result_td.innerText = `${strikes}S ${balls}B`;
+      }
+
+      new_tr.appendChild(new_times_td);
+      new_tr.appendChild(new_ball_td1);
+      new_tr.appendChild(new_ball_td2);
+      new_tr.appendChild(new_ball_td3);
+      new_tr.appendChild(new_result_td);
+      myboard.appendChild(new_tr);
+
+      let answerThrowNum = ""
+
+    }else{
+      alert("잘못된 투구입니다.");
+    }
+    
     clearInput()
   }
 </script>

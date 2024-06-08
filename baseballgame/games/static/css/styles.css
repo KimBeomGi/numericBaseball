@@ -119,11 +119,18 @@
   flex-direction: row;
   justify-content: space-around;
 }
+.number-check-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .number-check{
   /* display: flex; */
   /* flex-direction: row; */
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  border: 0.5px solid black;
+  border-collapse: collapse;
   width: 300px;
   height: 100px;
 }
@@ -142,5 +149,27 @@
 }
 .status-board{
   width: 400px;
+  text-align: center;
+  border: 1.5px solid black;
+  border-collapse: collapse;
+  box-sizing: border-box;
+}
+.status-board tr{
+  border: 1px solid black;
+  border-collapse: collapse;
+  box-sizing: border-box;
+}
+.status-board :first-child th{
+  height: 2.5em;
+}
+.status-board th:nth-child(1),
+.status-board td:nth-child(1) {
+  border-right: 1.5px solid black; /* 원하는 border 스타일로 변경 */
+}
+.status-board th:nth-child(5),
+.status-board td:nth-child(5) {
+  border-left: 1.5px solid black; /* 원하는 border 스타일로 변경 */
+}
+.text-center{
   text-align: center;
 }
