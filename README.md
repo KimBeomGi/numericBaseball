@@ -31,8 +31,7 @@
 1. 움직이는 이모지들과 바뀌는 응원 메시지로 야구장을 표현
 2. 투수와 타자 사이로 야구공이 움직이게 하여, 첫 페이지에서의 이목을 집중
 3. ‘혼자하기‘ 버튼을 통해 게임을 위한 숫자 선택 페이지 이동
-
-![image](https://github.com/KimBeomGi/numericBaseball/assets/128961042/5e11a9e7-5449-4f85-a264-5fc064b11910)
+![메인페이지](https://github.com/KimBeomGi/numericBaseball/assets/128961042/e5d6a26f-d63f-440a-948e-a5909298591e)
 
 ## 숫자 선택 페이지
 
